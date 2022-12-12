@@ -32,3 +32,37 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## setup test 
+1- install ts-jest :
+`npm install --save-dev jest typescript ts-jest @types/jest`
+then config ts-jest : `npx ts-jest config:init`
+
+2- install React Testing Library, builds on top of DOM Testing Library by adding APIs for working with React components.
+`npm install --save-dev @testing-library/react @testing-library/dom  @testing-library/jest-dom @testing-library/user-event`
+
+3- create tsconfig.jest.json
+
+`{
+    "expands": "./tsconfig.json",
+    "compilerOptions": {
+        "jsx": "react-jsx"
+    }
+}`
+
+4- change jest config =>go to site ts-jest => doc => option => add transform in jest.config.js
+
+`transform: {
+    '^.+\\.tsx?$': [
+      'ts-jest',
+      {
+        tsconfig: 'tsconfig.test.json',
+      },
+    ],
+  },`
+
+  5- search `setupFilesAfterEnv` in google and find sintax in site `jestjs.io` 
+  add `setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],` to `jest.config.js` 
+  create new file in src , called `setup-jest.ts` and import `'@testing-library/jest-dom'` there.
+
+  now render test should be passed.
